@@ -1,0 +1,98 @@
+
+
+.background-illustration {
+    position: absolute;
+    right: 0;
+    z-index: -1;
+    opacity: 60%;
+
+}
+
+.wrapper {
+    width: 90vw;
+    height: 100svh;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+li {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.text-center{
+text-align: center;
+}
+
+/* ABOUT US SECTION */
+
+.about-us {
+    width: 50rem;
+    background-color: rgba(239, 235, 214, 0.5);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    text-align: center;
+    align-items: center;
+}
+
+.about-us p {
+    font-size: 2em;
+    margin: 2em 0;
+    color: rgb(7, 25, 37);
+}
+
+/* LOGIN CARD SECTION */
+
+.login-card {
+    width: 50rem;
+    height: 80vh;
+    background-color: rgb(7, 25, 37);
+    border-radius: 15px;
+}
+
+.tablist {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 1em;
+}
+
+.tablist li {
+    width: 48%;
+    height: 3.6rem;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    font-size: 1.6em;
+    background-color: rgb(205, 136, 90);
+    border-radius: 10px;
+}
+
+.tablist a {
+    color: rgb(7, 25, 37);
+}
+
+.login-card {
+    color: rgb(249, 244, 248);
+}
+
+.link-list {
+    width: 50%;
+    margin: 1em auto;
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+.fab{
+    color: rgb(205, 136, 90); 
+    font-size: 2.4em;
+}
