@@ -1,10 +1,19 @@
 
 
+
+
 .background-illustration {
     position: absolute;
     right: 0;
     z-index: -1;
     opacity: 60%;
+    width: 60%;
+}
+
+
+.background-illustration img {
+
+    width: 100%;
 
 }
 
