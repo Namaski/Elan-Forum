@@ -9,100 +9,58 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
-
     <script defer src="https://kit.fontawesome.com/d80deb4694.js" crossorigin="anonymous"></script>
     <script src="https://cdn.tiny.cloud/1/zg3mwraazn1b2ezih16je1tc6z7gwp5yd4pod06ae5uai8pa/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
-
     <link rel="stylesheet" href="<?= PUBLIC_DIR ?>/css/style.css">
-    <link rel="stylesheet" href="<?= PUBLIC_DIR ?>/css/styleLogin.css">
-
+    <link rel="stylesheet" href="<?= PUBLIC_DIR ?>public\css\styleLogin.css">
     <title>FORUM</title>
 </head>
 
 <body>
+    <div id="wrapper">
+        <div id="mainpage">
+            <!-- c'est ici que les messages (erreur ou succès) s'affichent-->
+            <h3 class="message" style="color: red"><?= App\Session::getFlash("error") ?></h3>
+            <h3 class="message" style="color: green"><?= App\Session::getFlash("success") ?></h3>
+            <header>
+                <nav>
+                    <div id="nav-left">
+                        <a href="/">Accueil</a>
+                        <?php
+                        if (App\Session::isAdmin()) {
+                        ?>
+                            <a href="index.php?ctrl=home&action=users">Voir la liste des gens</a>
+                        <?php } ?>
+                    </div>
+                    <div id="nav-right">
+                        <?php
+                        // si l'utilisateur est connecté 
+                        if (App\Session::getUser()) {
+                        ?>
+                            <a href="index.php?ctrl=security&action=profile"><span class="fas fa-user"></span>&nbsp;<?= App\Session::getUser() ?></a>
+                            <a href="index.php?ctrl=security&action=logout">Déconnexion</a>
+                        <?php
+                        } else {
+                        ?>
+                            <a href="index.php?ctrl=security&action=login">Connexion</a>
+                            <a href="index.php?ctrl=security&action=register">Inscription</a>
+                            <a href="index.php?ctrl=forum&action=index">Liste des catégories</a>
+                        <?php
+                        }
+                        ?>
+                    </div>
+                </nav>
+            </header>
 
-    <div class="container">
-        <!----------------------------HEADER----------------------------->
-        <header>
+            <main id="forum">
+                <?= $page ?>
+            </main>
 
-            <i class="fa-solid fa-bars hamburgerIcon"></i>
-
-            <form action="" method="get">
-
-                <input type="text" id="searchbar">
-                <button type="submit">
-                    <img src="./public/img/svg/magnifying-glass-solid.svg" alt="">
-                </button>
-
-            </form>
-
-            <a href="">
-                <i class="fa-solid fa-circle-user"></i>
-            </a>
-
-        </header>
-
-        <!----------------------------SECONDARY-NAV----------------------------->
-        <nav class="active">
-
-            <i class="fa-solid fa-bars hamburgerIcon-active"></i>
-
-            <div>
-
-                <a href="index.php?ctrl=home">
-                    <i class="fa-solid fa-house-chimney"></i>
-                </a>
-                <a href="index.php?ctrl=forum&action=index">
-                    <i class="fa-solid fa-tags"></i>
-                </a>
-                <a href="index.php?ctrl=home&action=users">
-                    <i class="fa-solid fa-users"></i>
-                </a>
-                <a href="index.php?ctrl=message">
-                    <i class="fa-solid fa-message"></i>
-                </a>
-
-            </div>
-
-        </nav>
-        <!----------------------------MAIN CONTENT----------------------------->
-
-        <main>
-
-            <?= $page ?>
-
-        </main>
-
-        <!----------------------------ASIDE CONTENT----------------------------->
-
-        <aside>
-            <section>
-                <div>
-                    <h3>Hot topics</h3>
-                    <ol>
-                        <li>TOPIC</li>
-                        <li>TOPIC</li>
-                        <li>TOPIC</li>
-                        <li>TOPIC</li>
-                        <li>TOPIC</li>
-                    </ol>
-                </div>
-            </section>
-            <section>
-                <div>
-                    <h3>Latest topics</h3>
-                    <ol>
-                        <li>TOPIC</li>
-                        <li>TOPIC</li>
-                        <li>TOPIC</li>
-                        <li>TOPIC</li>
-                        <li>TOPIC</li>
-                    </ol>
-                </div>
-            </section>
-        </aside>
+        </div>
+        <footer>
+            <p>&copy; <?= date_create("now")->format("Y") ?> - <a href="#">Règlement du forum</a> - <a href="#">Mentions légales</a></p>
+        </footer>
     </div>
 
 
@@ -139,7 +97,6 @@
     </script>
 
     <script src="<?= PUBLIC_DIR ?>/js/script.js"></script>
-
 </body>
 
 </html>

@@ -13,24 +13,92 @@
 
 <body>
 
-    <header>
-        <img src=".\public\img\svg\list.svg" alt="hamburger list">
-        <input type="text">
-        <img src=".\public\img\svg\person-circle.svg" alt="login icon">
-    </header>
-    <nav>
+    <div class="container">
+        <!----------------------------HEADER----------------------------->
+        <header>
 
-        <img src="public\img\svg\list.svg" alt="hamburger icon">
-        <img src="public\img\svg\house-fill.svg" alt="home icon">
-        <img src="public\img\svg\tags-fill.svg" alt="topic icon">
-        <img src="public\img\svg\people-fill.svg" alt="user icon">
-        <img src="public\img\svg\chat-left-text-fill.svg" alt="direct message icon">
-       
-    </nav>
+            <i class="fa-solid fa-bars hamburgerIcon"></i>
 
-    <article>
+            <form action="" method="get">
 
-    </article>
+                <input type="text" id="searchbar">
+                <button type="submit">
+                    <img src="./public/img/svg/magnifying-glass-solid.svg" alt="">
+                </button>
+
+            </form>
+
+            <a href="">
+                <i class="fa-solid fa-circle-user"></i>
+            </a>
+
+        </header>
+        
+        <!----------------------------SECONDARY-NAV----------------------------->
+        <nav class="active">
+
+            <i class="fa-solid fa-bars hamburgerIcon-active"></i>
+
+            <div>
+
+                <a href="">
+                    <i class="fa-solid fa-house-chimney"></i>
+                </a>
+                <a href="">
+                    <i class="fa-solid fa-tags"></i>
+                </a>
+                <a href="">
+                    <i class="fa-solid fa-users"></i>
+                </a>
+                <a href="">
+                    <i class="fa-solid fa-message"></i>
+                </a>
+                
+            </div>
+            
+        </nav>
+        <!----------------------------MAIN CONTENT----------------------------->
+
+        <main>
+
+            <article>
+                <!-- <?=$content ?> -->
+                <!-- HOME VIEW -->
+
+            </article>
+
+        </main>
+
+        <!----------------------------ASIDE CONTENT----------------------------->
+        
+        <aside>
+            <section>
+                <div>
+                    <h3>Hot topics</h3>
+                    <ol>
+                        <li>TOPIC</li>
+                        <li>TOPIC</li>
+                        <li>TOPIC</li>
+                        <li>TOPIC</li>
+                        <li>TOPIC</li>
+                    </ol>
+                </div>
+            </section>
+            <section>
+                <div>
+                <h3>Latest topics</h3>
+                <ol>
+                    <li>TOPIC</li>
+                    <li>TOPIC</li>
+                    <li>TOPIC</li>
+                    <li>TOPIC</li>
+                    <li>TOPIC</li>
+                </ol>
+                </div>
+            </section>
+        </aside>
+
+    </div>
 
 </body>
 

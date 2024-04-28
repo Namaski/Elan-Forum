@@ -1,20 +1,12 @@
 
 
-
-
 .background-illustration {
     position: absolute;
     right: 0;
     z-index: -1;
     opacity: 60%;
-    width: 60%;
-}
-
-
-.background-illustration img {
-
-    width: 100%;
-
+    height: 100svh;
+    overflow: hidden;
 }
 
 .wrapper {
@@ -26,14 +18,6 @@
     justify-content: space-around;
 }
 
-li {
-    list-style-type: none;
-}
-
-a {
-    text-decoration: none;
-}
-
 .text-center{
 text-align: center;
 }
@@ -41,9 +25,9 @@ text-align: center;
 /* ABOUT US SECTION */
 
 .about-us {
-    width: 50rem;
+    width: 40rem;
     background-color: rgba(239, 235, 214, 0.5);
-    border-radius: 15px;
+    border-radius: 10px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -52,30 +36,37 @@ text-align: center;
 }
 
 .about-us p {
-    font-size: 2em;
-    margin: 2em 0;
+    font-size: 2rem;
+    margin: 1rem 0;
     color: rgb(7, 25, 37);
 }
 
 /* LOGIN CARD SECTION */
 
-.login-card {
-    width: 50rem;
+.loginCard {
+    width: 40vw;
     height: 80vh;
+    padding: 1%;
     background-color: rgb(7, 25, 37);
-    border-radius: 15px;
+    border-radius: 10px;
 }
 
-.tablist {
+.loginCard-wrapper{
+    width: 90%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.loginCard-nav {
+    height: 10%;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    margin-top: 1em;
+    justify-content: space-between;
 }
 
-.tablist li {
+.loginCard-nav li {
     width: 48%;
-    height: 3.6rem;
+    height: 100%;
     display: flex;
     align-items: center;
     text-align: center;
@@ -83,25 +74,82 @@ text-align: center;
     font-size: 1.6em;
     background-color: rgb(205, 136, 90);
     border-radius: 10px;
+    list-style-type: none;
 }
 
-.tablist a {
+.loginCard-nav a {
     color: rgb(7, 25, 37);
 }
 
-.login-card {
+
+.loginCard {
     color: rgb(249, 244, 248);
 }
 
-.link-list {
-    width: 50%;
-    margin: 1em auto;
+.loginCard-content{
+    height: 90%;
     display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.link-list {
+    width: 60%;
+    height: 5rem;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
     justify-content: space-around;
     
 }
 
-.fab{
+.loginCard .fab{
     color: rgb(205, 136, 90); 
     font-size: 2.4em;
 }
+
+.input-form{
+    display: flex;
+    align-items: center;
+    height: 5rem;
+    
+}
+
+.input-form>input{
+    width: 100%;
+    height: 3rem;
+    text-align: center;
+    font-size: 1.6em;
+    border-radius: 10px;
+    background-color: #071925;
+    border: 1px solid rgb(249, 244, 248,0.5);
+    color: rgb(249, 244, 248,0.5);
+}
+
+.forgotPassword-container{
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+}
+
+.rememberMe>.checkbox{
+    background-color: rgb(249, 244, 248);
+    border: none;
+}
+
+.rememberMe>.checkbox:checked{
+    /* jsp encore */
+}
+
+.forgotPassword{
+    color: rgb(205, 136, 90);
+}
+
+.loginCard button{
+    width: 100%;
+    height: 3.6rem;
+    font-size: 1.6em;
+    border-radius: 10px;
+    background-color: rgb(205, 136, 90);
+}
+
