@@ -15,6 +15,10 @@ a{
     text-decoration: none;
 }
 
+a:hover {
+    color: #CD885A;
+}
+
 ol {
     padding-left: 0.5em;
 }
@@ -24,6 +28,7 @@ ol li {
     list-style-position: outside; /* or 'inside' */
     margin-left: 1em; /* gives 'room' for the numbers to appear in */
 }
+
 
 /******************************************TEMPLATE*************************************/
 
@@ -103,7 +108,7 @@ aside{
     font-weight: 500;
 }
 
-section {
+.container>aside>section {
     height: 100%;
     border-bottom: 3px solid #f9f4f8;
     display: flex;
@@ -111,17 +116,17 @@ section {
     align-items: center;
 }
 
-section>div {
+.container>aside>section>div {
     height: 100%;
 }
 
-section>div>h3{
+.container>aside>section>div>h3{
     font-size: 170%;
     margin-bottom: 10%;
     color: #071925B2;
 }
 
-section>div>ol{
+.container>aside>section>div>ol{
     height: 80%;
     display: flex;
     flex-direction: column;

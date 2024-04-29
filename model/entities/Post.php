@@ -80,6 +80,25 @@ final class Post extends Entity
         return $this;
     }
 
+    /**
+     * Get the value of user
+     */
+    public function getTopic()
+    {
+        return $this->topic;
+    }
+
+    /**
+     * Set the value of user
+     *
+     * @return  self
+     */
+    public function setTopic($topic)
+    {
+        $this->topic = $topic;
+        return $this;
+    }
+
     public function __toString()
     {
         return $this->content;

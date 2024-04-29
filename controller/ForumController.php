@@ -27,6 +27,7 @@ class ForumController extends AbstractController implements ControllerInterface{
         ];
     }
 
+    // LIST
     public function listTopicsByCategory($id) {
 
         $topicManager = new TopicManager();
@@ -60,4 +61,69 @@ class ForumController extends AbstractController implements ControllerInterface{
             ]
         ];
     }
+
+    // ADD SETT DELETE
+    public function showPanelInsertTopic() {
+
+        $categoryManager = new CategoryManager();
+        $categorys = $categoryManager->findAll();
+
+
+        return [
+            "view" => VIEW_DIR."forum/showPanelInsertTopic.php",
+            "meta_description" => "Add a topic",
+            "data" => [
+                "categorys" => $categorys
+            ]
+        ];
+        
+    }
+
+    public function insertTopicWithPost() {
+        $topic = [];
+        $post = [];
+        if(isset($_POST['category']) && isset($_POST['title']) && isset($_POST['content'])) {
+
+            // FILTER DATA
+            $topic['category_id'] = filter_input(INPUT_POST, "category", FILTER_SANITIZE_NUMBER_INT);
+            $topic['title'] = filter_input(INPUT_POST, "title", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $post['content'] = filter_input(INPUT_POST, "content", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            var_dump($topic);
+            var_dump($post);
+
+            // INSTANCE
+            $topicManager = new TopicManager();
+            $postManager = new PostManager();
+            
+            // ADD TOPIC
+            $topic_id = $topic = $topicManager->add($topic);
+            
+            $post['topic_id'] = $topic_id;
+            // ADD POST
+            $posts = $postManager->add($post);
+
+            $_SESSION['sucess'] = "bravo";
+
+        } else {
+            $_SESSION['error'] = "faux";
+        }
+            
+            // RETURN VIEW
+            $categoryManager = new CategoryManager();
+            $categorys = $categoryManager->findAll();
+            
+
+        return [
+            "view" => VIEW_DIR."forum/showPanelInsertTopic.php",
+            "meta_description" => "Add a topic",
+            "data" => [
+                "categorys" => $categorys,
+                "topic" => $topic,
+                "post" => $post
+            ]
+        ];
+    }
+
+
 }

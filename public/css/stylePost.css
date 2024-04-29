@@ -1,0 +1,56 @@
+/************************************** TOPIC DETAIL *******************************/
+
+.topicSection{
+
+}
+
+.categoryTitle{
+    text-align: center;
+    color: #07192570;
+}
+
+/************************************** FIRST POST *******************************/
+
+.firstPost{
+    width: 95%;
+    margin: 1rem auto;
+    border-bottom: 2px solid #f9f4f8;
+}
+
+.firstPost>div{
+    display: flex;
+}
+
+.userInfo{
+    display: flex;
+    
+}
+.userInfo>h4{
+    color: #07192570;
+    margin-right: 0.6rem;
+}
+
+.firstPost>div>h1{
+    margin-left: 1.6rem;
+}
+
+.firstPost>p{
+    width: 95%;
+    margin: 1rem auto;
+}
+
+
+
+/************************************** COMMENTS *******************************/
+
+.postsFrame {
+    margin-left: 2.5%;
+}
+
+.comment {
+    margin-bottom: 1rem;
+}
+.comment>.userInfo{
+    margin-bottom: 0.6rem;
+}
+

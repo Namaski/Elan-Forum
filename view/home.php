@@ -1,8 +1,60 @@
-<h1>BIENVENUE SUR LE FORUM</h1>
+<?php
+$lastPosts = $result["data"]['lastPosts'];
 
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit ut nemo quia voluptas numquam, itaque ipsa soluta ratione eum temporibus aliquid, facere rerum in laborum debitis labore aliquam ullam cumque.</p>
+?>
 
-<p>
+<h3>Your feed</h3>
+
+
+
+
+<?php foreach ($lastPosts as $post) { ?>
+    
+    <?php 
+    // GET USER FROM POST
+    $lastUser = $post -> getUser();
+    // GET TOPIC FROM POST
+    $lastTopic = $post -> getTopic();
+    // GET CATEGORY FROM TOPIC
+    $lastCategory = $lastTopic -> getCategory();
+    
+    echo $lastCategory;
+    
+    ?>
+
+<div>
+
+    <div class="userInfo">
+
+        <h4>
+            <?=$lastUser; ?> 
+        </h4>
+
+        <figure><i class="fa-regular fa-circle-user"></i> </figure>
+
+    </div>
+
+    <h1>
+        <?=$lastTopic;?>
+    </h1>
+
+</div>
+
+    <p>
+        <?= $post->getContent(); ?>
+    </p>
+    
+
+<?php }; ?>
+
+
+
+
+
+
+
+
+<!-- <p>
     <a href="index.php?ctrl=security&action=login">Se connecter</a>
     <a href="index.php?ctrl=security&action=register">S'inscrire</a>
-</p>
+</p> -->

@@ -22,12 +22,38 @@ class PostManager extends Manager
     {
 
         $sql = "SELECT * 
-                FROM " . $this->tableName . " t 
-                WHERE t.topic_id = :id";
+                FROM " . $this->tableName . " p 
+                WHERE p.topic_id = :id";
 
         // la requête renvoie plusieurs enregistrements --> getMultipleResults
         return  $this->getMultipleResults(
             DAO::select($sql, ['id' => $id]),
+            $this->className
+        );
+    }
+
+    public function findAllLastPostByCategory()
+    {
+
+        $sql = "SELECT
+        p.id_post,
+        p.content,
+        p.creationDate,
+        p.user_id,
+        p.topic_id
+        FROM
+        post p
+        JOIN (  SELECT
+                topic_id,
+                MIN(creationDate) AS min_creationDate
+                FROM post
+                GROUP BY topic_id ) AS min_dates 
+        ON p.topic_id = min_dates.topic_id 
+        AND p.creationDate = min_dates.min_creationDate";
+
+        // la requête renvoie plusieurs enregistrements --> getMultipleResults
+        return  $this->getMultipleResults(
+            DAO::select($sql),
             $this->className
         );
     }

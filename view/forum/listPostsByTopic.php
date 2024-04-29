@@ -4,49 +4,93 @@
 // $category = $result["data"]['category'];
 $topic = $result["data"]['topic'];
 $posts = $result["data"]['posts'];
+
 $category = $topic->getCategory();
 $postUsers = [];
 
 ?>
 
 <?php
-// echo  "<br> Result :<br>"; 
+// echo  "<br> Result :<br>";
 // echo var_dump($result) . "<br>";
-// echo "<br> Catégory :<br>"; 
+// echo "<br> Catégory :<br>";
 // echo var_dump($category) . "<br>";
 // echo "<br> Topics : <br>";
-// echo var_dump($topic); 
+// echo var_dump($topic);
 // echo "<br> post : <br>";
 // echo var_dump($posts);
+// echo "<br> firstPost : <br>";
+// echo var_dump($firstPost);
 ?>
 
-<!------------------ TOPIC SECTION ---------------------->
 <article class="topicSection">
-    <h2>Catégorie : <?= $category  ?></h2>
-    <h1><?= $topic ?></h1>
+    <h2 class="categoryTitle"><?= $category  ?></h2>
 
-    <!------------------ POSTS ELEMENTS ---------------------->
-    <div class="postsFrame">
 
-        <?php
-        $i = 0;
-        foreach ($posts as $post) { ?>
+    <?php
+    $i = 0;
+    foreach ($posts as $post) { ?>
 
-            <div class="userPlace">
-                <?php
-                $postUsers[] = $post;
-                echo $postUsers[$i]->getUser();
-                $i++;
-                ?>
-            </div>
+        <?php if ($i == 0) { ?>
+            <!------------------ FIRST POST ---------------------->
 
-            <div class="content">
-                <?= $post->getContent(); ?>
-            </div>
+            <section class="firstPost">
 
+                <div>
+
+                    <div class="userInfo">
+
+                        <h4><?php
+                            $postUsers[] = $post;
+                            echo $postUsers[$i]->getUser();
+                            ?> </h4>
+
+                        <figure><i class="fa-regular fa-circle-user"></i> </figure>
+
+                    </div>
+
+                    <h1><?= $topic ?></h1>
+
+                </div>
+
+                <p>
+                    <?= $post->getContent(); ?>
+                </p>
+
+
+            </section>
 
         <?php } ?>
 
-    </div>
+
+        <?php if ($i != 0) { ?>
+
+
+            <!------------------ COMMENTS ---------------------->
+            <section class="comment">
+
+                <div class="userInfo">
+
+                    <h4><?php
+                        $postUsers[] = $post;
+                        echo $postUsers[$i]->getUser();
+                        $i++;
+                        ?></h4>
+
+                    <figure><i class="fa-regular fa-circle-user"></i> </figure>
+
+                </div>
+
+                <div class="content">
+                    <?= $post->getContent(); ?>
+                </div>
+
+            </section>
+
+        <?php } ?>
+        <?php $i++; ?>
+
+
+    <?php } ?>
 
 </article>

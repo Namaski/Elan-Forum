@@ -3,15 +3,24 @@ namespace Controller;
 
 use App\AbstractController;
 use App\ControllerInterface;
+use Model\Managers\PostManager;
 use Model\Managers\UserManager;
 
 class HomeController extends AbstractController implements ControllerInterface {
 
     public function index(){
+        $postManager = new PostManager();
+        $lastPosts = $postManager->findAllLastPostByCategory(['creationDate', 'DESC']);
+
         return [
             "view" => VIEW_DIR."home.php",
-            "meta_description" => "Page d'accueil du forum"
+            "meta_description" => "Your feed",
+            "data" => [ 
+                "lastPosts" => $lastPosts,
+
+            ]
         ];
+        
     }
         
     public function users(){
@@ -28,4 +37,12 @@ class HomeController extends AbstractController implements ControllerInterface {
             ]
         ];
     }
+
+    public function findAllLastPostByCategory(){
+        $this->restrictTo("ROLE_USER");
+
+
+    }
+
+
 }
