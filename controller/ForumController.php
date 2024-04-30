@@ -80,8 +80,13 @@ class ForumController extends AbstractController implements ControllerInterface{
     }
 
     public function insertTopicWithPost() {
+        // INSTANCE
+        $topicManager = new TopicManager();
+        $postManager = new PostManager();
+        $msg = new Session();
         $topic = [];
         $post = [];
+
         if(isset($_POST['category']) && isset($_POST['title']) && isset($_POST['content'])) {
 
             // FILTER DATA
@@ -92,10 +97,6 @@ class ForumController extends AbstractController implements ControllerInterface{
             var_dump($topic);
             var_dump($post);
 
-            // INSTANCE
-            $topicManager = new TopicManager();
-            $postManager = new PostManager();
-            
             // ADD TOPIC
             $topic_id = $topic = $topicManager->add($topic);
             
@@ -103,10 +104,11 @@ class ForumController extends AbstractController implements ControllerInterface{
             // ADD POST
             $posts = $postManager->add($post);
 
-            $_SESSION['sucess'] = "bravo";
+            
+            $msg->addFlash('success', 'Your post has been sent');
 
         } else {
-            $_SESSION['error'] = "faux";
+            $msg->addFlash('error', 'Post not sent');
         }
             
             // RETURN VIEW

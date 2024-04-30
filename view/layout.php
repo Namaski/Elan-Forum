@@ -24,31 +24,29 @@
 
 <body>
 
+    <!----------------------------HEADER----------------------------->
+    <header class="header">
+
+        <i class="fa-solid fa-bars hamburgerIcon hide"></i>
+
+        <form action="" method="get">
+
+            <input type="text" id="searchbar">
+            <button type="submit">
+                <img src="./public/img/svg/magnifying-glass-solid.svg" alt="">
+            </button>
+
+        </form>
+        <!-- CHANGER HREF -->
+        
+            <i class="fa-solid fa-circle-user"></i>
+        
+
+    </header>
+
     <div class="container">
-        <!----------------------------HEADER----------------------------->
-        <header>
-
-            <i class="fa-solid fa-bars hamburgerIcon"></i>
-
-            <form action="" method="get">
-
-                <input type="text" id="searchbar">
-                <button type="submit">
-                    <img src="./public/img/svg/magnifying-glass-solid.svg" alt="">
-                </button>
-
-            </form>
-            <!-- CHANGER HREF -->
-            <a href="index.php?ctrl=forum&&action=showPanelInsertTopic">
-                <i class="fa-solid fa-circle-user"></i>
-            </a>
-
-        </header>
-
         <!----------------------------SECONDARY-NAV----------------------------->
-        <nav class="active">
-
-            <i class="fa-solid fa-bars hamburgerIcon-active"></i>
+        <nav class="secondaryNav showNav">
 
             <div>
 
@@ -64,15 +62,12 @@
                 <a href="index.php?ctrl=message">
                     <i class="fa-solid fa-message"></i>
                 </a>
-
-                <i class="fa-solid fa-circle-plus newPost"></i>
-
             </div>
 
         </nav>
         <!----------------------------MAIN CONTENT----------------------------->
 
-        <main>
+        <main class="main">
             <h3 class="message" style="color: red"><?= App\Session::getFlash("error") ?></h3>
             <h3 class="message" style="color: green"><?= App\Session::getFlash("success") ?></h3>
 
@@ -82,7 +77,7 @@
 
         <!----------------------------ASIDE CONTENT----------------------------->
 
-        <aside>
+        <aside class="aside">
             <section>
                 <div>
                     <h3>Hot topics</h3>
@@ -108,6 +103,7 @@
                 </div>
             </section>
         </aside>
+
     </div>
 
 

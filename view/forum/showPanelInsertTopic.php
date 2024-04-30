@@ -51,11 +51,11 @@ $categorys = $result["data"]["categorys"]
 
 
     <?php
-    $topic = $result['data']['topic'];
-    $post = $result['data']['topic'];
-    echo var_dump($topic);
-    echo "<br>";
-    echo var_dump($post);
+    // $topic = $result['data']['topic'];
+    // $post = $result['data']['topic'];
+    // echo var_dump($topic);
+    // echo "<br>";
+    // echo var_dump($post);
 
 
     ?>

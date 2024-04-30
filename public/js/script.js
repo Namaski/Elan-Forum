@@ -1,12 +1,12 @@
-$(document).ready(function() {
-    $(".message").each(function() {
+$(document).ready(function () {
+    $(".message").each(function () {
         if ($(this).text().length > 0) {
-            $(this).slideDown(500, function() {
+            $(this).slideDown(500, function () {
                 $(this).delay(3000).slideUp(500)
             })
         }
     })
-    $(".delete-btn").on("click", function() {
+    $(".delete-btn").on("click", function () {
         return confirm("Etes-vous sûr de vouloir supprimer?")
     })
     tinymce.init({
@@ -24,7 +24,12 @@ $(document).ready(function() {
         content_css: '//www.tiny.cloud/css/codepen.min.css'
     });
 
-    
-    console.log("test")
+
+    $(".hamburgerIcon").on("click", function(e) {
+        // $(".secondaryNav").toggle();
+        $(".hamburgerIcon").toggleClass("hide show");
+        $(".secondaryNav").toggleClass("showNav hideNav");
+    });
+
 })
 
