@@ -19,7 +19,14 @@
 <?php
 foreach($categories as $category ){ ?>
     <p><strong><a href="index.php?ctrl=forum&action=listTopicsByCategory&id=<?= $category->getId() ?>"><?= $category->getName() ?></a></strong></p>
-<?php }
+<?php } ?>
+
+<form action="index.php?ctrl=forum&action=insertCategory" method="post">
+    <label for="categoryName"> Add a category :</label>
+    <input type="text" name="name" id="categoryName">
+    
+    <input type="submit" value="Send">
+</form>
 
 
   

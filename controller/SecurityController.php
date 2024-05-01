@@ -8,7 +8,9 @@ class SecurityController extends AbstractController{
     // contiendra les méthodes liées à l'authentification : register, login et logout
 
     public function register () {}
-    public function login () {}
+    public function login () {
+        require "view\security\login.php";
+    }
     public function logout () {
         require "view\security\login.php";
     }

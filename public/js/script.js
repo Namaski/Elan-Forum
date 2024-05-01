@@ -27,8 +27,11 @@ $(document).ready(function () {
 
     $(".hamburgerIcon").on("click", function(e) {
         // $(".secondaryNav").toggle();
-        $(".hamburgerIcon").toggleClass("hide show");
-        $(".secondaryNav").toggleClass("showNav hideNav");
+        // $(".hamburgerIcon").toggleClass("hide show");
+        $(".secondaryNav").toggleClass("isFade");     
+        setTimeout(function () {
+            $(".secondaryNav").toggleClass("hideNav");
+        },250);
     });
 
 })

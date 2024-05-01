@@ -46,7 +46,7 @@
 
     <div class="container">
         <!----------------------------SECONDARY-NAV----------------------------->
-        <nav class="secondaryNav showNav">
+        <nav class="secondaryNav">
 
             <div>
 

@@ -1,0 +1,29 @@
+Fonctionnalités à mettre en place cette semaine au plus tard :
+
+_ Pouvoir supprimer un commentaire (garder l'id et la date puis set les autres valeurs en NULL)
+
+_ Pouvoir modifier son commentaire et préciser qu'un commentaire est modifié comme sur Twitter
+
+_ Pouvoir suivre des catégories et avoir la possibilité de poster un topic sur les catés suivis via la page home.
+
+_ Améliorer la page des catégories pour que ce soit un peu comme reedit avec les topic récents et populaire (système de popularité à voir plus tard)
+
+_ voir comment gerer les users
+
+Fonctionnalités déjà présentes :
+
+_ Pouvoir ajouter une catégorie
+
+_ Pouvoir commenter un topic (il faut gerer l'user pour pouvoir vraiment commenter)
+
+_ Début de responsive
+
+_ Début d'home-page avec un feed sur tous les topics (bientôt suivies) récents
+
+_ Possibilité d'ajouter un topic
+
+_ Possibilité de voir la liste des catégories
+
+_ Possibilité de voir la liste des topics par catégories
+
+_ Possibilité de voir un topic avec les commentaires

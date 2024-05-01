@@ -58,6 +58,9 @@ $postUsers = [];
                     <?= $post->getContent(); ?>
                 </p>
 
+                <a href="index.php?ctrl=forum&&action=showPanelInsertPost&&id=<?= $topic->getId();?>">
+                    <i class="fa-solid fa-circle-plus newPost"></i>
+                </a>
 
             </section>
 

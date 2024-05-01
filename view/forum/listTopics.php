@@ -16,7 +16,17 @@ $topics = $result["data"]['topics'];
 // echo "<br> post : <br>";
 // echo var_dump($posts);
 ?>
-<?php
+<?php if (isset($topics)) {
 foreach ($topics as $topic) { ?>
-    <p><a href="index.php?ctrl=forum&action=listPostsByTopic&id=<?= $topic->getId() ?>"><?= $topic ?></a> par <?= $topic->getUser() ?></p>
-<?php } ?>
+    <p>
+        <a href="index.php?ctrl=forum&action=listPostsByTopic&id=<?= $topic->getId() ?>">
+            <?= $topic ?>
+        </a>
+        par <?= $topic->getUser() ?>
+    </p>
+<?php }
+} else { ?>
+    <h3>There is no post yet</h3>
+<?php }; ?>
+
+

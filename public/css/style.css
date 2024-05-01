@@ -105,6 +105,10 @@ header i {
     text-align: center;
 }
 
+.isFade{
+    opacity: 0;
+}
+
 .hideNav{
     opacity: 0;
     width: 0;
@@ -166,11 +170,24 @@ main {
 }
 
 .feed-wrapper{
-    width: 95%;
+    width: 80%;
     margin: 0 auto;
 }
 
 .contentHeader{
+    width: 95%;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
+}
+
+.lastTopic>h3{
+    text-align: center;
+    color: #07192570;
+    font-weight: 500;
+    font-size: 1.6em;
+}
+
+.lastTopic{
+    
 }
