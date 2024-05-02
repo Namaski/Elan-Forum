@@ -48,7 +48,7 @@ class TopicManager extends Manager
             
             //GET LAST ID
             $pdo = new DAO;
-            $newID = $pdo->lastInsertId();
+            
             $post['topic-id'] = $newID;
             
             // ADD POST

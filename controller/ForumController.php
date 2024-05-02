@@ -104,7 +104,6 @@ class ForumController extends AbstractController implements ControllerInterface
         // INSTANCE
         $topicManager = new TopicManager();
         $postManager = new PostManager();
-        $msg = new Session();
         $topic = [];
         $post = [];
 
@@ -126,25 +125,12 @@ class ForumController extends AbstractController implements ControllerInterface
             $postManager->add($post);
 
 
-            $msg->addFlash('success', 'Your post has been sent');
+            Session::addFlash('success', 'Your post has been sent');
         } else {
-            $msg->addFlash('error', 'Post not sent');
+            Session::addFlash('error', 'Post not sent');
         }
 
-        // RETURN VIEW
-        $categoryManager = new CategoryManager();
-        $categorys = $categoryManager->findAll();
-
-
-        return [
-            "view" => VIEW_DIR . "forum/showPanelInsertTopic.php",
-            "meta_description" => "Add a topic",
-            "data" => [
-                "categorys" => $categorys,
-                "topic" => $topic,
-                "post" => $post
-            ]
-        ];
+        $this->redirectTo('forum','listPostsByTopic',$post['topic_id']); // A TESTER
     }
 
     public function insertPost($id)

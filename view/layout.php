@@ -38,9 +38,9 @@
 
         </form>
         <!-- CHANGER HREF -->
-        
+        <a href="index.php?ctrl=security&action=showLoginPanel">
             <i class="fa-solid fa-circle-user"></i>
-        
+        </a>
 
     </header>
 

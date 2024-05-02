@@ -93,9 +93,8 @@ abstract class DAO{
         try{
             $stmt = self::$bdd->prepare($sql);
             $stmt->execute($params);
-            
             $results = ($multiple) ? $stmt->fetchAll() : $stmt->fetch();
-
+            
             $stmt->closeCursor();
             return ($results == false) ? null : $results;
         }

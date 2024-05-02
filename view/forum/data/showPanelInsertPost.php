@@ -11,7 +11,7 @@ $topic = $result["data"]["topic"]
 
             <div>
                 <label for="content"> Content </label>
-                <input type="text" name="content" value="" id="topic">
+                <textarea name="content" id="content" class="post" cols="30" rows="10"></textarea>
             </div>
 
             <!-- <div>

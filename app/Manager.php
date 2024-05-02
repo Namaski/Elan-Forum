@@ -95,6 +95,7 @@ abstract class Manager{
             return new $class($row);
         }
         return false;
+        
     }
 
     protected function getSingleScalarResult($row){

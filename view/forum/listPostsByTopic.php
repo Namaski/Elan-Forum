@@ -21,7 +21,6 @@ $postUsers = [];
 // echo var_dump($posts);
 // echo "<br> firstPost : <br>";
 // echo var_dump($firstPost);
-
 ?>
 
 <article class="topicSection">

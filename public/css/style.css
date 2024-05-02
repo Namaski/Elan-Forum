@@ -12,13 +12,18 @@ body {
 }
 
 a {
-    color: inherit;
+    color: #CD885A;
     text-decoration: none;
 }
 
-a:hover {
-    color: #CD885A;
+i {
+    color: inherit;
 }
+
+a:hover {
+    color: #cd885a8a;
+}
+
 
 ol {
     padding-left: 0.5em;
@@ -63,6 +68,10 @@ header>a {
 
 }
 
+header i{
+    color:#CD885A;
+}
+
 #searchbar {
     width: 50%;
     height: 50%;
@@ -100,7 +109,6 @@ header>a {
 
 .secondaryNav i,
 header i {
-    color: #CD885A;
     font-size: 400%;
     text-align: center;
 }

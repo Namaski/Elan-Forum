@@ -41,8 +41,7 @@ class PostManager extends Manager
         p.creationDate,
         p.user_id,
         p.topic_id
-        FROM
-        post p
+        FROM " . $this->tableName . " p
         JOIN (  SELECT
                 topic_id,
                 MIN(creationDate) AS min_creationDate
