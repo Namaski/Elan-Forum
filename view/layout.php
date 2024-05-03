@@ -38,23 +38,28 @@
 
         </form>
         <!-- CHANGER HREF -->
-        <a href="index.php?ctrl=security&action=showLoginPanel">
-            <i class="fa-solid fa-circle-user"></i>
-        </a>
 
-        <ul class="dropdown-menu">
-            <li>
-                <!-- LET ME COOK -->
-                <a href=""> 
-                    Setting
-                </a>
-            </li>
-            <li>
-                <a href="index.php?ctrl=security&action=logout">
-                    Logout
-                </a>
-            </li>
-        </ul>
+        <div class="profile">
+
+          
+                <i class="fa-solid fa-circle-user"></i>
+         
+
+            <ul class="dropdown-menu">
+                <li>
+                    <!-- LET ME COOK -->
+                    <a href="">
+                        Setting
+                    </a>
+                </li>
+                <li>
+                    <a href="index.php?ctrl=security&action=logout">
+                        Logout
+                    </a>
+                </li>
+            </ul>
+
+        </div>
 
     </header>
 
@@ -84,7 +89,6 @@
         <main class="main">
             <h3 class="message" style="color: red"><?= App\Session::getFlash("error") ?></h3>
             <h3 class="message" style="color: green"><?= App\Session::getFlash("success") ?></h3>
-
             <?= $page ?>
 
         </main>

@@ -8,11 +8,9 @@ _ Pouvoir suivre des catégories et avoir la possibilité de poster un topic sur
 
 _ Améliorer la page des catégories pour que ce soit un peu comme reedit avec les topic récents et populaire (système de popularité à voir plus tard)
 
-_ voir comment gerer les users
-
 Fonctionnalités déjà présentes :
 
-_ Pouvoir se register, login et logout (A Améliorer)
+_ Pouvoir se register, login et logout
 
 _ Pouvoir ajouter une catégorie
 
@@ -29,3 +27,7 @@ _ Possibilité de voir la liste des catégories
 _ Possibilité de voir la liste des topics par catégories
 
 _ Possibilité de voir un topic avec les commentaires
+
+Amélioration à effectuer :
+
+_Gérer les rôles: admin, user et modérateur et leurs accorder des autorisations différentes

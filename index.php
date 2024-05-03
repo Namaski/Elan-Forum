@@ -43,7 +43,7 @@ if(!class_exists($ctrlNS)){
     //********************** ex:index.php?ctrl=abracadabra -> controller\HomeController
 }
 
-$ctrl = new $ctrlNS(); // *************TROUVER POURQUOI INSTANCIER UNE CLASSE 
+$ctrl = new $ctrlNS();
 
 $action = "index";//action par défaut de n'importe quel contrôleur
 //si l'action est présente dans l'url ET que la méthode correspondante existe dans le ctrl

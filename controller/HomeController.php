@@ -13,19 +13,21 @@ class HomeController extends AbstractController implements ControllerInterface {
         $postManager = new PostManager();
         $lastPosts = $postManager->findAllLastPostByCategory(['creationDate', 'DESC']);
 
-        if (Session::getUser()) { // A FAIRE
-            # REDIRECT HOME PAGE
+        $user = Session::getUser();
+        if($user) {
+            return [
+                "view" => VIEW_DIR."home.php",
+                "meta_description" => "Your feed",
+                "data" => [ 
+                    "lastPosts" => $lastPosts,
+    
+                ]
+            ];
         } else {
-            # REDIRECT LOGIN/REGISTER
-        }
-        return [
-            "view" => VIEW_DIR."home.php",
-            "meta_description" => "Your feed",
-            "data" => [ 
-                "lastPosts" => $lastPosts,
-
-            ]
-        ];
+            $this->redirectTo('security','showLoginPanel');
+            exit;
+        } 
+        
         
     }
         
@@ -46,8 +48,6 @@ class HomeController extends AbstractController implements ControllerInterface {
 
     public function findAllLastPostByCategory(){
         $this->restrictTo("ROLE_USER");
-
-
     }
 
 

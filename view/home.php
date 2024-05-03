@@ -20,8 +20,6 @@ $lastPosts = $result["data"]['lastPosts'];
 
 <section class="feed-wrapper">
 
-
-
     <?php foreach ($lastPosts as $post) { ?>
 
         <?php

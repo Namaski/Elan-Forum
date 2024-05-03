@@ -52,7 +52,7 @@ $(".nav-item").on("click", function () {
 
         $('.nav-login').prop('aria-selected', true);
         $('.nav-register').prop('aria-selected', false);
-       
+
 
         // HIDE REGISTER FORM
         $("#pills-register").fadeOut(200)
@@ -91,20 +91,28 @@ $(".nav-item").on("click", function () {
 
     }
 
-    
+
 });
 
+// HIDE/SHOW PASSWORD FOR THE FORM
 
 $(".fa-eye").on("click", () => {
     $(".fa-eye").hide()
-    $(".fa-eye-slash").show()    
+    $(".fa-eye-slash").show()
     $(".password-input").attr('type', 'text')
 })
 
 $(".fa-eye-slash").on("click", () => {
     $(".fa-eye-slash").hide()
-    $(".fa-eye").show()    
+    $(".fa-eye").show()
     $(".password-input").attr('type', 'password')
+})
+
+
+// MENU DROPDOWN FOR THE PROFILE
+
+$(".profile").on("click", () => {
+    $(".dropdown-menu").toggle()
 })
 
 
