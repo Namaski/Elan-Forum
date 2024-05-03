@@ -1,5 +1,7 @@
 <?php
 namespace App;
+require_once 'vendor/autoload.php';
+
 
 //*********************************** INDEX PERMET DE CREER LE CHEMIN D'ACCES DU FICHIER VOULU
 

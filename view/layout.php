@@ -42,6 +42,20 @@
             <i class="fa-solid fa-circle-user"></i>
         </a>
 
+        <ul class="dropdown-menu">
+            <li>
+                <!-- LET ME COOK -->
+                <a href=""> 
+                    Setting
+                </a>
+            </li>
+            <li>
+                <a href="index.php?ctrl=security&action=logout">
+                    Logout
+                </a>
+            </li>
+        </ul>
+
     </header>
 
     <div class="container">

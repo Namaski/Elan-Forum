@@ -57,6 +57,7 @@ header {
     align-items: center;
     justify-content: center;
     grid-area: header;
+    
 }
 
 header>form,
@@ -78,6 +79,10 @@ header i{
     border-radius: 15px;
     border: none;
 
+}
+
+header .dropdown-menu{
+    position: absolute;
 }
 
 

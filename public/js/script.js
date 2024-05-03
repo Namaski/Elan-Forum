@@ -15,7 +15,11 @@ $(document).ready(function () {
             'removeformat | help',
         content_css: '//www.tiny.cloud/css/codepen.min.css'
     });
+
+
+
 })
+
 $(".message").each(function () {
     if ($(this).text().length > 0) {
         $(this).slideDown(500, function () {
@@ -64,9 +68,6 @@ $(".nav-item").on("click", function () {
             }, 200);
         }, 200);
 
-        
-
-
     } else if (navItem === 'tab-register') {
 
         //SET ARIA FOR ACCESIBILITY ------------ REGARDER POURQUOI CA MARCHE PAS APRES
@@ -89,5 +90,21 @@ $(".nav-item").on("click", function () {
         }, 200);
 
     }
+
+    
 });
+
+
+$(".fa-eye").on("click", () => {
+    $(".fa-eye").hide()
+    $(".fa-eye-slash").show()    
+    $(".password-input").attr('type', 'text')
+})
+
+$(".fa-eye-slash").on("click", () => {
+    $(".fa-eye-slash").hide()
+    $(".fa-eye").show()    
+    $(".password-input").attr('type', 'password')
+})
+
 

@@ -30,7 +30,7 @@
 
         <div class="loginCard">
             <div class="loginCard-wrapper">
-            <h3 class="message" style="color: red"><?= App\Session::getFlash("error") ?></h3>
+                <h3 class="message" style="color: red"><?= App\Session::getFlash("error") ?></h3>
 
                 <!-- NAV LOGIN/REGISTER -->
 
@@ -80,12 +80,12 @@
 
                     <!-- EMAIL -->
                     <div class="input-form">
-                        <input type="email" id="loginEmail" class="form-control" name="email" value="" placeholder="Email" />
+                        <input type="email" id="loginEmail" name="email" value="" placeholder="Email" />
                     </div>
 
                     <!-- PASSWORD -->
                     <div class="input-form">
-                        <input type="password" id="loginPassword" class="form-control" name="password" value="" placeholder="Password" />
+                        <input type="password" id="loginPassword" name="password" value="" placeholder="Password" />
                     </div>
 
                     <!-- REMEMBER ME/ FORGOT PASSWORD -->
@@ -118,7 +118,7 @@
 
                 <form action="index.php?ctrl=security&action=register" method="post" class="loginCard-content fade" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
 
-                <div class="text-center">
+                    <div class="text-center">
                         <p>Sign in with:</p>
 
                         <div class="link-list">
@@ -151,31 +151,41 @@
 
                     <!-- Username input -->
                     <div class="input-form">
-                        <input name="username" type="text" id="registerUsername" class="form-control" placeholder="Username" required/>
                         <!-- <label class="form-label" for="registerUsername">Username</label> -->
+                        <input name="username" type="text" id="registerUsername" placeholder="Username" required />
                     </div>
 
                     <!-- Email input -->
                     <div class="input-form">
-                        <input name="email" type="email" id="registerEmail" class="form-control" placeholder="Email" required/>
+                        <input name="email" type="email" id="registerEmail" placeholder="Email" required />
                         <!-- <label class="form-label" for="registerEmail">Email</label> -->
                     </div>
 
                     <!-- Password input -->
                     <div class="input-form">
-                        <input name="password1" type="password" id="registerPassword" class="form-control" placeholder="Password" required/>
-                        <!-- <label class="form-label" for="registerPassword">Password</label> -->
+                        <label class="password-label" for="registerPassword">
+                            <input name="password1" type="password" id="registerPassword" class="password-input" placeholder="Password" required />
+                            <div class="password-icon">
+                                <i class="fa-regular fa-eye"></i>
+                                <i class="fa-solid fa-eye-slash"></i>
+                            </div>
+                        </label>
                     </div>
 
                     <!-- Repeat Password input -->
                     <div class="input-form">
-                        <input name="password2" type="password" id="registerRepeatPassword" class="form-control" placeholder="Repeat password" required/>
-                        <!-- <label class="form-label" for="registerRepeatPassword">Repeat password</label> -->
+                        <label class="password-label" for="registerRepeatPassword">
+                            <input name="password2" type="password" id="registerRepeatPassword" class="password-input" placeholder="Repeat password" required />
+                            <div class="password-icon">
+                                <i class="fa-regular fa-eye"></i>
+                                <i class="fa-solid fa-eye-slash"></i>
+                            </div>
+                        </label>
                     </div>
 
                     <!-- Checkbox -->
-                    <div class="form-check d-flex justify-content-center mb-4">
-                        <input class="form-check-input me-2" type="checkbox" value="" id="registerCheck" checked aria-describedby="registerCheckHelpText" required/>
+                    <div class="form-check">
+                        <input class="chebox" type="checkbox" value="" id="registerCheck" checked aria-describedby="registerCheckHelpText" required />
                         <label class="form-check-label" for="registerCheck">I have read and agree to the terms</label>
                     </div>
 

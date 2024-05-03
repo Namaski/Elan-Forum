@@ -12,6 +12,8 @@ _ voir comment gerer les users
 
 Fonctionnalités déjà présentes :
 
+_ Pouvoir se register, login et logout (A Améliorer)
+
 _ Pouvoir ajouter une catégorie
 
 _ Pouvoir commenter un topic (il faut gerer l'user pour pouvoir vraiment commenter)
