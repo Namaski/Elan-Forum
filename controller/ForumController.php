@@ -12,6 +12,9 @@ use Model\Managers\PostManager;
 class ForumController extends AbstractController implements ControllerInterface
 {
 
+    /**
+     * INDEX
+     */
     public function index()
     {
 
@@ -29,8 +32,11 @@ class ForumController extends AbstractController implements ControllerInterface
             ]
         ];
     }
-
-    // LIST
+    ///////////////////////////////SHOW PANEL/////////////////////////////////////////
+   
+    /**
+     * LIST TOPICS BY CATEGORY
+     */
     public function listTopicsByCategory($id)
     {
 
@@ -48,7 +54,9 @@ class ForumController extends AbstractController implements ControllerInterface
             ]
         ];
     }
-
+    /**
+     * LIST POST BY TOPIC
+     */
     public function listPostsByTopic($id)
     {
 
@@ -67,7 +75,9 @@ class ForumController extends AbstractController implements ControllerInterface
         ];
     }
 
-    // SHOW PANEL ADD DELETE (REMOVE AFTER AND MAKE FORM DYNAMIC)
+    /**
+     * SHOW PANEL INSERT TOPIC
+     */
     public function showPanelInsertTopic()
     {
 
@@ -83,6 +93,9 @@ class ForumController extends AbstractController implements ControllerInterface
             ]
         ];
     }
+    /**
+     * SHOW PANEL INSERT POST
+     */
     public function showPanelInsertPost($id)
     {
 
@@ -98,7 +111,11 @@ class ForumController extends AbstractController implements ControllerInterface
             ]
         ];
     }
-
+    ///////////////////////////////MAKE AN ACTION////////////////////////////////////////
+    /*****************ADD***********/
+    /**
+     * INSERT TOPIC WITH POST
+     */
     public function insertTopicWithPost()
     {
         // INSTANCE
@@ -133,6 +150,9 @@ class ForumController extends AbstractController implements ControllerInterface
         $this->redirectTo('forum','listPostsByTopic',$post['topic_id']); // A TESTER
     }
 
+    /**
+     * INSERT POST
+     */
     public function insertPost($id)
     {
         // INSTANCE
@@ -169,7 +189,9 @@ class ForumController extends AbstractController implements ControllerInterface
             ]
         ];
     }
-
+    /**
+     * INSERT CATEGORY
+     */
     public function insertCategory()
     {
         // INSTANCE
@@ -203,4 +225,37 @@ class ForumController extends AbstractController implements ControllerInterface
             ]
         ];
     }
+
+    /********************DELETE*****************/
+    /**
+     * DELETE POST
+     */
+    public function deletePost($id){
+        
+        $id_post = filter_var($id,FILTER_SANITIZE_NUMBER_INT);
+
+        $postManager = new PostManager;
+        
+        $postManager->delete($id_post);
+        
+        $this->redirectTo('forum','listTopics');
+    }
+    /**
+     * DELETE TOPIC
+     */
+    public function deleteTopic($id){
+        
+        $id_post = filter_var($id,FILTER_SANITIZE_NUMBER_INT);
+
+        $postManager = new PostManager;
+        
+        $postManager->delete($id_post);
+        
+        $this->redirectTo('forum','listTopics');
+    }
+
+
+
+
+
 }

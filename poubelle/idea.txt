@@ -4,9 +4,7 @@ _ Pouvoir supprimer un commentaire (garder l'id et la date puis set les autres v
 
 _ Pouvoir modifier son commentaire et préciser qu'un commentaire est modifié comme sur Twitter
 
-_ Pouvoir suivre des catégories et avoir la possibilité de poster un topic sur les catés suivis via la page home.
-
-_ Améliorer la page des catégories pour que ce soit un peu comme reedit avec les topic récents et populaire (système de popularité à voir plus tard)
+_ Etre protéger de la faille crsf 
 
 Fonctionnalités déjà présentes :
 
@@ -29,5 +27,9 @@ _ Possibilité de voir la liste des topics par catégories
 _ Possibilité de voir un topic avec les commentaires
 
 Amélioration à effectuer :
+
+_ Pouvoir suivre des catégories et avoir la possibilité de poster un topic sur les catés suivis via la page home.
+
+_ Améliorer la page des catégories pour que ce soit un peu comme reedit avec les topic récents et populaire (système de popularité à voir plus tard)
 
 _Gérer les rôles: admin, user et modérateur et leurs accorder des autorisations différentes

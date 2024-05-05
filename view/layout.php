@@ -43,13 +43,17 @@
 
           
                 <i class="fa-solid fa-circle-user"></i>
-         
+                <?php 
+                $userId = $_SESSION['user']->getId();  
+                $userToken = $_SESSION['user']->getToken();  
+                ?> 
 
             <ul class="dropdown-menu">
                 <li>
                     <!-- LET ME COOK -->
-                    <a href="">
-                        Setting
+                    
+                    <a href="index.php?ctrl=security&action=deleteUser&id=<?=$userId;?>&token=<?=$userToken;?>">
+                        Setting (delete for now)
                     </a>
                 </li>
                 <li>

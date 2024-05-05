@@ -7,6 +7,7 @@ use App\Manager;
 use App\AbstractController;
 use App\ControllerInterface;
 use Model\Managers\UserManager;
+use PHPMailer\PHPMailer\OAuthTokenProvider;
 
 class SecurityController extends AbstractController
 {
@@ -26,7 +27,9 @@ class SecurityController extends AbstractController
 
 
 
-
+    /**
+     * REGISTER
+     */
     public function register()
     {
 
@@ -51,26 +54,30 @@ class SecurityController extends AbstractController
 
                     if ($password1 == $password2 && strlen($password1) >= 5) {
 
+                        // USER ID IN SESSION
+                        $token = bin2hex(random_bytes(32));
+                        // WELCOME MAIL
+                        $this->sentEmailTo(
+                            $email,
+                            "Welcome to InsightForce",
+                            '<h1> Have Fun ! <h1>
+                        <p> One last step to complete your registration, </p> 
+                        <p> Click on the link below : </p>
+                        <small><a href="http://localhost/Elan-Forum/index.php?ctrl=security&action=validateRegistration&id=' . $token . '&' . '">' . $token . '</a></small>'
+                        );
+
                         // FUNCTION ADD -> ADD THE DATA AND RETURN lastInsertId() WE STORE IN ID_NEWUSER
-                        $id_newUser = $newUser->add([
+                        $newUser->add([
                             'username' => $username,
                             'email' => $email,
-                            'password' => password_hash($password1, PASSWORD_DEFAULT)
+                            'password' => password_hash($password1, PASSWORD_DEFAULT),
+                            'token' => $token
                         ]);
 
-                        // SUCESS MESSAGE
-                        Session::addFlash('success', 'Welcome to InsightForce, ' . $username);
-
-                        $user = $newUser->findOneById($id_newUser);
-                        
-                        // USER ID IN SESSION
-                        Session::setUser($newUser); // DEMANDER SI C'EST UNE BONNE IDEE DE STOCKER L USER DANS SESSION
-
-                        // WELCOME MAIL
-                        $this->sentEmailTo($email, "Welcome to InsightForce", "Have Fun !");
-
                         // REDIRECT HOME
-                        $this->redirectTo('home');
+
+                        Session::addFlash('success', 'A mail as been sent to your mailbox, please check it and follow the instructions');
+                        $this->redirectTo('security', 'showRegisterPanel');
                         exit;
                     } else { // PASSWORD IS INCORRECT
 
@@ -97,6 +104,40 @@ class SecurityController extends AbstractController
         $this->redirectTo('security', 'showRegisterPanel');
         exit;
     }
+    /**
+     * VALIDATE REGISTRATION
+     */
+    public function validateRegistration()
+    {
+
+        $token = filter_input(INPUT_GET, "id", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+        if ($token) {
+
+            $userManager = new UserManager;
+            $user = $userManager->findOneByToken($token);
+
+            if ($user) {
+
+                Session::addFlash('success', 'Welcome to InsightForce, ' . $user->getUsername());
+                Session::setUser($user); // DEMANDER SI C'EST UNE BONNE IDEE DE STOCKER L USER DANS SESSION
+
+                $this->redirectTo('home');
+                exit;
+            }
+            // MESSAGE TEST A DELETE APRES
+            Session::addFlash('error', 'Incorrect value, please, verify the information send and register');
+            $this->redirectTo('security', 'showRegisterPanel');
+            exit;
+        }
+
+        $this->redirectTo('security', 'showRegisterPanel');
+        exit;
+    }
+
+    /**
+     * LOGIN
+     */
 
     public function login()
     {
@@ -138,12 +179,47 @@ class SecurityController extends AbstractController
         exit;
     }
 
-
+    /**
+     * LOGOUT
+     */
     public function logout()
     {
         // DEMANDER SI ON PEUT CHANGER LES ELEMENTS DE LA SESSION COMME AVEC INSPECT HTML
         Session::setUser(false);
         // REDIRECT TO LOGIN PAGE
         $this->redirectTo('security', 'showLoginPanel');
+    }
+
+    /**
+     * DELETE USER
+     */
+    public function deleteUser($id, $token)
+    {
+        $user = Session::getUser();
+
+        if ($user) {
+
+            $userToken = $user->getToken();
+
+            if ($userToken === $token) {
+                
+                $userManager = new UserManager;
+                // DELETE USER AND REMOVE TOKEN IN SESSION
+                $userManager->delete($id);
+                Session::setUser(false);
+                // MESSAGE AND REDIRECTION
+                Session::addFlash('success', 'Your account has been sucessfully deleted');
+                $this->redirectTo('security', 'showLoginPanel');
+                exit;
+            }
+            // ERROR FILTERED DATA IS FALSE
+            Session::addFlash('error', 'Incorrect value, please, verify the information send and login');
+            $this->redirectTo('security', 'showLoginPanel');
+            exit;
+        }
+        // ERROR FILTERED DATA IS FALSE
+        Session::addFlash('error', 'Incorrect value, please, verify the information send and login');
+        $this->redirectTo('security', 'showLoginPanel');
+        exit;
     }
 }

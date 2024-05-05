@@ -10,6 +10,7 @@ $topic = $result["data"]["topic"]
         <section>
 
             <div>
+                <input type="hidden" name="token" value="<?= $_SESSION['user']->getToken(); ?>">
                 <label for="content"> Content </label>
                 <textarea name="content" id="content" class="post" cols="30" rows="10"></textarea>
             </div>
@@ -18,9 +19,9 @@ $topic = $result["data"]["topic"]
                 <label for="file"> insert an image </label>
                 <input type="file" name="" id="file">
             </div> -->
-            
+
             <input type="submit" value="Send">
-            
+
 
         </section>
 

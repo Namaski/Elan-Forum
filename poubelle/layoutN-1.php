@@ -52,7 +52,7 @@
                     </div>
                 </nav>
             </header>
-
+            
             <main id="forum">
                 <?= $page ?>
             </main>

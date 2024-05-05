@@ -21,7 +21,9 @@ foreach($categories as $category ){ ?>
     <p><strong><a href="index.php?ctrl=forum&action=listTopicsByCategory&id=<?= $category->getId() ?>"><?= $category->getName() ?></a></strong></p>
 <?php } ?>
 
+
 <form action="index.php?ctrl=forum&action=insertCategory" method="post">
+    <input type="hidden" name="token" value="<?=$_SESSION['user']->getToken();?>">
     <label for="categoryName"> Add a category :</label>
     <input type="text" name="name" id="categoryName">
     

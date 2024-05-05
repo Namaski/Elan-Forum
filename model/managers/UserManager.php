@@ -19,14 +19,28 @@ class UserManager extends Manager
 
     public function findUserMail($email)
     {
-        $sql = "SELECT a.*
-        FROM " . $this->tableName . " a
-        WHERE a.email = :email
+        $sql = "SELECT u.*
+        FROM " . $this->tableName . " u
+        WHERE u.email = :email
         ";
 
         return $this->getOneOrNullResult(
             DAO::select($sql, ['email' => $email], false),
             $this->className
         );
+    }
+
+    public function findOneByToken($token)
+    {
+        $sql = "SELECT u.*
+        FROM " . $this->tableName . " u
+        WHERE u.token = :token
+        ";
+
+        return $this->getOneOrNullResult(
+            DAO::select($sql, ['token' => $token], false),
+            $this->className
+        );
+
     }
 }

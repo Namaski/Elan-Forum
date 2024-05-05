@@ -1,6 +1,5 @@
 <?php
 $lastPosts = $result["data"]['lastPosts'];
-
 ?>
 
 <div class="contentHeader">
