@@ -1,5 +1,5 @@
 <?php
-    $categories = $result["data"]['categories']; 
+$categories = $result["data"]['categories'];
 ?>
 
 <h2>Category List</h2>
@@ -16,19 +16,23 @@
 ?>
 
 
-<?php
-foreach($categories as $category ){ ?>
-    <p><strong><a href="index.php?ctrl=forum&action=listTopicsByCategory&id=<?= $category->getId() ?>"><?= $category->getName() ?></a></strong></p>
-<?php } ?>
 
+<?php if (isset($categories)) { ?>
+    <?php
+foreach ($categories as $category) { ?>
+    <p><strong>
+            <a href="index.php?ctrl=forum&action=listTopicsByCategory&id=<?= $category->getId() ?>&token=<?= $_SESSION['newToken'] ?>">
+                <?= $category->getName() ?></a>
+        </strong></p>
+<?php }
+} else { ?>
+    <h3>There is no categories yet</h3>
+<?php }; ?>
 
 <form action="index.php?ctrl=forum&action=insertCategory" method="post">
-    <input type="hidden" name="token" value="<?=$_SESSION['user']->getToken();?>">
+    <input type="hidden" name="token" value="<?= $_SESSION['newToken'] ?>">
     <label for="categoryName"> Add a category :</label>
     <input type="text" name="name" id="categoryName">
-    
+
     <input type="submit" value="Send">
 </form>
-
-
-  

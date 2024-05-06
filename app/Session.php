@@ -44,4 +44,24 @@ class Session{
         }
         return false;
     }
+
+    public static function setNewToken(){
+        $token = bin2hex(random_bytes(32));
+        $_SESSION['newToken'] = $token;
+
+    }
+
+    public static function getNewToken(){
+
+        return (isset($_SESSION['newToken'])) ? $_SESSION['newToken'] : false;
+    }
 }
+
+
+// fonction csrf 
+
+// chaine de caractère aleatoire hachhées
+
+// je mets en session la valeur du token_get_all
+
+// lors de la soumision d'un form je compare la valeur du form avec celle ne session 

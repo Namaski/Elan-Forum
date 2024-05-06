@@ -78,6 +78,8 @@
 
                     <p class="text-center">or:</p>
 
+                    <input type="hidden" name="token" value="<?= $_SESSION['newToken'] ?>">
+
                     <!-- EMAIL -->
                     <div class="input-form">
                         <input type="email" id="loginEmail" name="email" value="" placeholder="Email" />
@@ -102,8 +104,10 @@
                         </div>
                     </div>
 
+
+
                     <!-- Submit button -->
-                    <button name="submit" type="submit" value="submit">
+                    <button id="btn" name="submit" type="submit" value="submit">
                         Sign in
                     </button>
 
@@ -117,7 +121,8 @@
                 <!-- REGISTER CONTENT -->
 
                 <form action="index.php?ctrl=security&action=register" method="post" class="loginCard-content fade" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
-
+                    <h3 class="message" style="color: red"><?= App\Session::getFlash("error") ?></h3>
+                    <h3 class="message" style="color: green"><?= App\Session::getFlash("success") ?></h3>
                     <div class="text-center">
                         <p>Sign in with:</p>
 
@@ -149,6 +154,8 @@
                     <p class="text-center">or:</p>
 
 
+                    <input type="hidden" name="token" value="<?= $_SESSION['newToken'] ?>">
+
                     <!-- Username input -->
                     <div class="input-form">
                         <!-- <label class="form-label" for="registerUsername">Username</label> -->
@@ -160,6 +167,12 @@
                         <input name="email" type="email" id="registerEmail" placeholder="Email" required />
                         <!-- <label class="form-label" for="registerEmail">Email</label> -->
                     </div>
+
+                    <!-- Bait input -->
+                    
+                        <input name="bait" type="hidden"  placeholder="Email" value="" />
+                        <!-- <label class="form-label" for="registerEmail">Email</label> -->
+                  
 
                     <!-- Password input -->
                     <div class="input-form">
@@ -189,8 +202,9 @@
                         <label class="form-check-label" for="registerCheck">I have read and agree to the terms</label>
                     </div>
 
+
                     <!-- Submit button -->
-                    <button name="submit" type="submit" value="submit" class="btn btn-primary btn-block mb-3">Sign in</button>
+                    <button name="submit" id="btn" type="submit" value="submit" class="btn btn-primary btn-block mb-3">Sign in</button>
                 </form>
 
 
@@ -210,6 +224,13 @@
 
         </article>
     </div>
+
+    <!-- Replace the variables below. -->
+    <script>
+        function onSubmit(token) {
+            document.getElementById("demo-form").submit();
+        }
+    </script>
 
 </body>
 

@@ -19,7 +19,7 @@ $topics = $result["data"]['topics'];
 <?php if (isset($topics)) {
 foreach ($topics as $topic) { ?>
     <p>
-        <a href="index.php?ctrl=forum&action=listPostsByTopic&id=<?= $topic->getId() ?>">
+        <a href="index.php?ctrl=forum&action=listPostsByTopic&id=<?= $topic->getId() ?>&token=<?=$_SESSION['newToken'] ?>">
             <?= $topic ?>
         </a>
         par <?= $topic->getUser() ?>

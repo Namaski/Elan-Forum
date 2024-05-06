@@ -33,7 +33,7 @@ class ForumController extends AbstractController implements ControllerInterface
         ];
     }
     ///////////////////////////////SHOW PANEL/////////////////////////////////////////
-   
+
     /**
      * LIST TOPICS BY CATEGORY
      */
@@ -74,80 +74,105 @@ class ForumController extends AbstractController implements ControllerInterface
             ]
         ];
     }
-
-    /**
-     * SHOW PANEL INSERT TOPIC
-     */
-    public function showPanelInsertTopic()
-    {
-
-        $categoryManager = new CategoryManager();
-        $categorys = $categoryManager->findAll();
-
-
-        return [
-            "view" => VIEW_DIR . "forum/showPanelInsertTopic.php",
-            "meta_description" => "Add a topic",
-            "data" => [
-                "categorys" => $categorys
-            ]
-        ];
-    }
+    /**********INSERT*************/
     /**
      * SHOW PANEL INSERT POST
      */
     public function showPanelInsertPost($id)
     {
-
+        
         $topicManager = new CategoryManager();
         $topic = $topicManager->findOneById($id);
-
-
+        
+        
         return [
             "view" => VIEW_DIR . "forum/data/showPanelInsertPost.php",
             "meta_description" => "Add a post",
             "data" => [
                 "topic" => $topic
-            ]
-        ];
-    }
+                
+                ]
+            ];
+        }
+
+        /**
+         * SHOW PANEL INSERT TOPIC
+         */
+        // public function showPanelInsertTopic()
+        // {
+    
+        //     $categoryManager = new CategoryManager();
+        //     $categorys = $categoryManager->findAll();
+    
+    
+        //     return [
+        //         "view" => VIEW_DIR . "forum/data/showPanelInsertTopic.php",
+        //         "meta_description" => "Add a topic",
+        //         "data" => [
+        //             "categorys" => $categorys
+        //         ]
+        //     ];
+        // }
     ///////////////////////////////MAKE AN ACTION////////////////////////////////////////
-    /*****************ADD***********/
+    /*****************INSERT***********/
     /**
      * INSERT TOPIC WITH POST
      */
     public function insertTopicWithPost()
     {
-        // INSTANCE
-        $topicManager = new TopicManager();
-        $postManager = new PostManager();
-        $topic = [];
-        $post = [];
 
-        if (isset($_POST['category']) && isset($_POST['title']) && isset($_POST['content'])) {
+        if (isset($_POST['submit'])) {
+
+            // INSTANCE
+            $topicManager = new TopicManager();
+            $postManager = new PostManager();
+            // $sessionManager = new Session;
 
             // FILTER DATA
-            $topic['category_id'] = filter_input(INPUT_POST, "category", FILTER_SANITIZE_NUMBER_INT);
-            $topic['title'] = filter_input(INPUT_POST, "title", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $post['content'] = filter_input(INPUT_POST, "content", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $topicCategoryId = filter_input(INPUT_POST, "category", FILTER_SANITIZE_NUMBER_INT);
+            $topicTitle = filter_input(INPUT_POST, "title", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $content = filter_input(INPUT_POST, "content", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $token = filter_input(INPUT_POST, "token", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-            var_dump($topic);
-            var_dump($post);
+            if ($topicCategoryId && $topicTitle && $content && $token === $_SESSION['token']) { // IF FILTER RETURN TRUE
+                
+                // ADD TOPIC
+                $topicId = $topicManager->add([
+                    'category_id' => $topicCategoryId,
+                    'title' => $topicTitle
+                ]);
 
-            // ADD TOPIC
-            $topic_id = $topic = $topicManager->add($topic);
+                // ADD POST
+                $postManager->add([
+                    'content' => $content,
+                    'topic_id' => $topicId
+                ]);
 
-            $post['topic_id'] = $topic_id; // tester si c'est utile
-            // ADD POST
-            $postManager->add($post);
+                // SUCCESS MSG
+                Session::addFlash('success', 'Your post has been sent');
+                $this->redirectTo('forum', 'listPostsByTopic', "" . $topicId . "");
+                exit;
+
+            } else {
+
+                Session::addFlash('error', 'Post not sent');
+                $this->redirectTo('forum', 'insertTopicWithPost');
+                exit;
+            }
+        } else { // ELSE IS NOT SUBMITED AND SHOW DEFAULT VIEW
+
+            $categoryManager = new CategoryManager();
+            $categorys = $categoryManager->findAll();
 
 
-            Session::addFlash('success', 'Your post has been sent');
-        } else {
-            Session::addFlash('error', 'Post not sent');
+            return [
+                "view" => VIEW_DIR . "forum/data/insertTopicWithPost.php",
+                "meta_description" => "Add a topic",
+                "data" => [
+                    "categorys" => $categorys
+                ]
+            ];
         }
-
-        $this->redirectTo('forum','listPostsByTopic',$post['topic_id']); // A TESTER
     }
 
     /**
@@ -157,37 +182,40 @@ class ForumController extends AbstractController implements ControllerInterface
     {
         // INSTANCE
         $postManager = new PostManager();
-        $msg = new Session();
+        $sessionManager = new Session();
         $post = [];
+        $user = $sessionManager->getUser();
 
         if (isset($_POST['content']) && $_POST['content'] != '') {
-
             // FILTER DATA
-            $post['content'] = filter_input(INPUT_POST, "content", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $post['topic_id'] = $id;
-            // ADD POST
-            $postManager->add($post);
+            $token = filter_input(INPUT_POST, "token", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            
+            if ($_SESSION['token'] === $token) { // CHECK IF TOKEN SESSION = TOKEN SENT IN FORM
+                $post['content'] = filter_input(INPUT_POST, "content", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $post['user_id'] = "" . $user->getId() . "";
+                $post['topic_id'] = $id;
 
-
-            $msg->addFlash('success', 'Your post has been sent');
+                // ADD POST
+                $postManager->add($post);
+                $sessionManager->addFlash('success', 'Your post has been sent');
+                exit;
+            } else {
+                $sessionManager->addFlash('error', 'Post not sent');
+                $this->redirectTo('forum', 'listPostsByTopic', $id);
+                exit;
+            }
         } else {
-            $msg->addFlash('error', 'Post not sent');
+
+            $sessionManager->addFlash('error', 'Post not sent');
+            $this->redirectTo('forum', 'listPostsByTopic', $id);
+            exit;
+
         }
 
-        var_dump($id);
-        var_dump($post);
-        $topicManager = new TopicManager();
-        $topic = $topicManager->findOneById($id);
-        $posts = $postManager->findPostsByTopic($id);
+        $sessionManager->addFlash('error', 'Post not sent');
+        $this->redirectTo('forum', 'listPostsByTopic', $id);
+        exit;
 
-        return [
-            "view" => VIEW_DIR . "forum/listPostsByTopic.php",
-            "meta_description" => "Topics : " . $topic,
-            "data" => [
-                "topic" => $topic,
-                "posts" => $posts
-            ]
-        ];
     }
     /**
      * INSERT CATEGORY
@@ -198,6 +226,7 @@ class ForumController extends AbstractController implements ControllerInterface
         $categoryManager = new CategoryManager();
         $msg = new Session();
         $category = [];
+
 
         if (isset($_POST['name']) && $_POST['name'] != '') {
 
@@ -230,32 +259,33 @@ class ForumController extends AbstractController implements ControllerInterface
     /**
      * DELETE POST
      */
-    public function deletePost($id){
-        
-        $id_post = filter_var($id,FILTER_SANITIZE_NUMBER_INT);
-
-        $postManager = new PostManager;
-        
-        $postManager->delete($id_post);
-        
-        $this->redirectTo('forum','listTopics');
+    public function deletePost($id, $token)
+    {
+        if ($_SESSION['token'] === $token) {
+            
+            $id_post = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
+    
+            $postManager = new PostManager;
+    
+            $postManager->delete($id_post);
+    
+            $this->redirectTo('forum', 'listTopics');
+        }
     }
     /**
      * DELETE TOPIC
      */
-    public function deleteTopic($id){
-        
-        $id_post = filter_var($id,FILTER_SANITIZE_NUMBER_INT);
+    public function deleteTopic($id, $token)
+    {
+        if ($_SESSION['token'] === $token) {
+            $id_post = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
+    
+            $postManager = new PostManager;
+    
+            $postManager->delete($id_post);
+    
+            $this->redirectTo('forum', 'listTopics');
+        }
 
-        $postManager = new PostManager;
-        
-        $postManager->delete($id_post);
-        
-        $this->redirectTo('forum','listTopics');
     }
-
-
-
-
-
 }

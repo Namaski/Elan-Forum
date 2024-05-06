@@ -8,6 +8,8 @@ $categorys = $result["data"]["categorys"]
 
         <section>
 
+            <input type="hidden" name="token" value="<?= $_SESSION['newToken'] ?>">
+
             <div>
 
                 <h2>What do you want to talk about ?</h2>
@@ -25,7 +27,6 @@ $categorys = $result["data"]["categorys"]
 
             </div>
 
-
             <div>
                 <label for="title"> Title </label>
                 <input type="text" name="title" value="" id="title">
@@ -41,9 +42,9 @@ $categorys = $result["data"]["categorys"]
                 <label for="file"> insert an image </label>
                 <input type="file" name="" id="file">
             </div> -->
-            
-            <input type="submit" value="Send">
-            
+
+            <input type="submit" name='submit' value="Send">
+
 
         </section>
 

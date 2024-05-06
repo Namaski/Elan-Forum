@@ -10,7 +10,7 @@ $lastPosts = $result["data"]['lastPosts'];
 
     <button>USERS</button>
 
-    <a href="index.php?ctrl=forum&&action=showPanelInsertTopic">
+    <a href="index.php?ctrl=forum&&action=InsertTopicWithPost">
         <i class="fa-solid fa-circle-plus newPost"></i>
     </a>
 
@@ -19,46 +19,52 @@ $lastPosts = $result["data"]['lastPosts'];
 
 <section class="feed-wrapper">
 
-    <?php foreach ($lastPosts as $post) { ?>
+    <?php
+    if (isset($lastPosts)) {
+        foreach ($lastPosts as $post) { ?>
 
-        <?php
-        // GET USER FROM POST
-        $lastUser = $post->getUser();
-        // GET TOPIC FROM POST
-        $lastTopic = $post->getTopic();
-        // GET CATEGORY FROM TOPIC
-        $lastCategory = $lastTopic->getCategory();
-        ?>
+            <?php
+            // GET USER FROM POST
+            $lastUser = $post->getUser();
+            // GET TOPIC FROM POST
+            $lastTopic = $post->getTopic();
+            // GET CATEGORY FROM TOPIC
+            $lastCategory = $lastTopic->getCategory();
+            ?>
 
-        <article class="lastTopic">
+            <article class="lastTopic">
 
-        <h3><?= $lastCategory; ?></h3>
+                <h3><?= $lastCategory; ?></h3>
 
-            <div class="userTopic">
+                <div class="userTopic">
 
-                <div class="userInfo">
+                    <div class="userInfo">
 
-                    <h4>
-                        <?= $lastUser; ?>
-                    </h4>
+                        <h4>
+                            <?= $lastUser; ?>
+                        </h4>
 
-                    <figure><i class="fa-regular fa-circle-user"></i> </figure>
+                        <figure><i class="fa-regular fa-circle-user"></i> </figure>
+
+                    </div>
+
+                    <h2>
+                        <?= $lastTopic; ?>
+                    </h2>
 
                 </div>
 
-                <h1>
-                    <?= $lastTopic; ?>
-                </h1>
+                <p>
+                    <?= $post->getContent(); ?>
+                </p>
 
-            </div>
+            </article>
 
-            <p>
-                <?= $post->getContent(); ?>
-            </p>
-
-        </article>
-
-    <?php }; ?>
+    <?php };
+    } else {
+        echo '<h2> Your feed is empty... </h2>';
+    }
+    ?>
 
 
 </section>

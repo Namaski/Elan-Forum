@@ -4,8 +4,8 @@
 // $category = $result["data"]['category'];
 $topic = $result["data"]['topic'];
 $posts = $result["data"]['posts'];
-
 $category = $topic->getCategory();
+
 $postUsers = [];
 
 ?>
@@ -30,7 +30,7 @@ $postUsers = [];
     <?php
     $i = 0;
     foreach ($posts as $post) { ?>
-
+    
         <?php if ($i == 0) { ?>
             <!------------------ FIRST POST ---------------------->
 
@@ -43,6 +43,7 @@ $postUsers = [];
                         <h4><?php
                             $postUsers[] = $post;
                             echo $postUsers[$i]->getUser();
+                            $i++
                             ?> </h4>
 
                         <figure><i class="fa-regular fa-circle-user"></i> </figure>
@@ -57,7 +58,7 @@ $postUsers = [];
                     <?= $post->getContent(); ?>
                 </p>
 
-                <a href="index.php?ctrl=forum&&action=showPanelInsertPost&&id=<?= $topic->getId();?>">
+                <a href="index.php?ctrl=forum&&action=showPanelInsertPost&&id=<?= $topic->getId();?>&id=<?= $topic->getId() ?>&token=<?=$_SESSION['newToken'] ?>">
                     <i class="fa-solid fa-circle-plus newPost"></i>
                 </a>
 
@@ -75,9 +76,12 @@ $postUsers = [];
                 <div class="userInfo">
 
                     <h4><?php
+                        
                         $postUsers[] = $post;
-                        echo $postUsers[$i]->getUser();
-                        $i++;
+                        if ($postUsers[$i]) {
+                            echo $postUsers[$i]->getUser();
+                            
+                        }
                         ?></h4>
 
                     <figure><i class="fa-regular fa-circle-user"></i> </figure>
@@ -85,13 +89,16 @@ $postUsers = [];
                 </div>
 
                 <div class="content">
-                    <?= $post->getContent(); ?>
+                <?php if ($postUsers[$i]) 
+                {
+                    echo $postUsers[$i]->getContent();
+                }
+                $i++ ?>
                 </div>
 
             </section>
 
         <?php } ?>
-        <?php $i++; ?>
 
 
     <?php } ?>

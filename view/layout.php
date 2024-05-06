@@ -15,6 +15,8 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
 
+   
+
     <link rel="stylesheet" href="<?= PUBLIC_DIR ?>/css/style.css">
     <link rel="stylesheet" href="<?= PUBLIC_DIR ?>/css/styleLogin.css">
     <link rel="stylesheet" href="<?= PUBLIC_DIR ?>/css/stylePost.css">
@@ -37,34 +39,36 @@
             </button>
 
         </form>
+
         <!-- CHANGER HREF -->
 
         <div class="profile">
 
-          
-                <i class="fa-solid fa-circle-user"></i>
-                <?php 
-                $userId = $_SESSION['user']->getId();  
-                $userToken = $_SESSION['user']->getToken();  
-                ?> 
+
+            <i class="fa-solid fa-circle-user"></i>
+            <?php
+            $userId = $_SESSION['user']->getId();
+            ?>
 
             <ul class="dropdown-menu">
                 <li>
                     <!-- LET ME COOK -->
-                    
-                    <a href="index.php?ctrl=security&action=deleteUser&id=<?=$userId;?>&token=<?=$userToken;?>">
+
+                    <a href="index.php?ctrl=security&action=deleteUser&id=<?= $userId; ?>&token=<?= $_SESSION['newToken'] ?>">
                         Setting (delete for now)
                     </a>
+
                 </li>
                 <li>
+
                     <a href="index.php?ctrl=security&action=logout">
                         Logout
                     </a>
+
                 </li>
             </ul>
 
         </div>
-
     </header>
 
     <div class="container">
@@ -131,6 +135,7 @@
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous">
     </script>
+
 
 
     <script src="<?= PUBLIC_DIR ?>/js/script.js"></script>

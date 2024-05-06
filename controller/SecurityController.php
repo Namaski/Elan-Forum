@@ -33,7 +33,7 @@ class SecurityController extends AbstractController
     public function register()
     {
 
-        if ($_POST['submit']) {
+        if ($_POST['submit'] && !$_POST['bait']) {
 
             $newUser = new UserManager;
 
@@ -101,6 +101,8 @@ class SecurityController extends AbstractController
             exit;
         }
 
+        Session::addFlash('error', 'Incorrect value, please, verify the information send and register');
+
         $this->redirectTo('security', 'showRegisterPanel');
         exit;
     }
@@ -153,8 +155,9 @@ class SecurityController extends AbstractController
 
                 if ($user) { // IF USER EXIST
                     $hash = $user->getPassword();
-                    if (password_verify($password, $hash)) { //
-                        Session::setUser($user); // DEMANDER SI C'EST UNE BONNE IDEE DE METTRE LE HASH DANS SESSION
+
+                    if (password_verify($password, $hash)) { // IF PASSWORD MATCH
+                        Session::setUser($user); 
                         $this->redirectTo('home');
                         exit;
                     } else { // IF PASSWORD DONT MATCH
@@ -187,6 +190,7 @@ class SecurityController extends AbstractController
         // DEMANDER SI ON PEUT CHANGER LES ELEMENTS DE LA SESSION COMME AVEC INSPECT HTML
         Session::setUser(false);
         // REDIRECT TO LOGIN PAGE
+        
         $this->redirectTo('security', 'showLoginPanel');
     }
 
@@ -195,14 +199,11 @@ class SecurityController extends AbstractController
      */
     public function deleteUser($id, $token)
     {
-        $user = Session::getUser();
+        $userToken = Session::getNewToken();
 
-        if ($user) {
-
-            $userToken = $user->getToken();
-
+            var_dump($userToken); var_dump($token); die;
             if ($userToken === $token) {
-                
+                var_dump("test"); die;
                 $userManager = new UserManager;
                 // DELETE USER AND REMOVE TOKEN IN SESSION
                 $userManager->delete($id);
@@ -216,7 +217,7 @@ class SecurityController extends AbstractController
             Session::addFlash('error', 'Incorrect value, please, verify the information send and login');
             $this->redirectTo('security', 'showLoginPanel');
             exit;
-        }
+        
         // ERROR FILTERED DATA IS FALSE
         Session::addFlash('error', 'Incorrect value, please, verify the information send and login');
         $this->redirectTo('security', 'showLoginPanel');
