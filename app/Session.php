@@ -10,6 +10,7 @@ class Session{
     */
     public static function addFlash($categ, $msg){
         $_SESSION[$categ] = $msg;
+        return $_SESSION[$categ];
     }
 
     /**

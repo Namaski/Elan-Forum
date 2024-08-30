@@ -31,7 +31,8 @@
         <div class="loginCard">
             <div class="loginCard-wrapper">
                 <h3 class="message" style="color: red"><?= App\Session::getFlash("error") ?></h3>
-
+                <h3 class="message" style="color: green"><?= App\Session::getFlash("success") ?></h3>
+                
                 <!-- NAV LOGIN/REGISTER -->
 
                 <ul class="loginCard-nav" role="tablist">
@@ -169,8 +170,14 @@
                     </div>
 
                     <!-- Bait input -->
+
+                    
                     
                         <input name="bait" type="hidden"  placeholder="Email" value="" />
+
+
+
+
                         <!-- <label class="form-label" for="registerEmail">Email</label> -->
                   
 

@@ -53,7 +53,8 @@ class SecurityController extends AbstractController
                 } else { // MAIL IS AVAILABLE
 
                     if ($password1 == $password2 && strlen($password1) >= 5) {
-
+                        
+                        Session::addFlash('success', 'A mail as been sent to your mailbox, please check it and follow the instructions');
                         // USER ID IN SESSION
                         $token = bin2hex(random_bytes(32));
                         // WELCOME MAIL
@@ -75,14 +76,13 @@ class SecurityController extends AbstractController
                         ]);
 
                         // REDIRECT HOME
-
-                        Session::addFlash('success', 'A mail as been sent to your mailbox, please check it and follow the instructions');
                         $this->redirectTo('security', 'showRegisterPanel');
                         exit;
+
+
                     } else { // PASSWORD IS INCORRECT
 
                         Session::addFlash('error', 'Incorrect value, the two passwords must be iddentical and longer than 5 caracters');
-
                         $this->redirectTo('security', 'showRegisterPanel');
                         exit;
                     }
@@ -90,7 +90,6 @@ class SecurityController extends AbstractController
             } else { // THE FILTER RETURN NON-VALUE
 
                 Session::addFlash('error', 'Incorrect value, please, verify the information send and register');
-
                 $this->redirectTo('security', 'showRegisterPanel');
                 exit;
             }
@@ -140,10 +139,9 @@ class SecurityController extends AbstractController
     /**
      * LOGIN
      */
-
     public function login()
     {
-        if ($_POST['submit']) {
+        if ($_POST['submit'] && !$_POST['bait']) {
             $connectUser = new UserManager;
             // FILTER DATA
             $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL);
